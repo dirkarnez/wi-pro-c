@@ -66,9 +66,9 @@ int main() {
     wifi_csi_info_t csi_info;
 
     // Copy raw bytes directly into the structural layout
-    memcpy(&csi_info, buffer, sizeof(csi_infodata));
+    memcpy(&csi_info, buffer, sizeof(csi_info));
 
-    wifi_csi_rx_cb(NULL, csi_info);
+    wifi_csi_rx_cb(NULL, &csi_info);
 
     return 0;
 }
