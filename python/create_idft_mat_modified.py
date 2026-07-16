@@ -2,9 +2,13 @@ import numpy as np
 
 def export_idft_svd(start_dist, stop_dist, num_points, tol=1e-3):
     d_range = np.linspace(start_dist, stop_dist, num_points)
+    print(f"d_range: {d_range}")
+
     freq = np.fft.fftfreq(128, d=1/40e6)
     M = np.exp(2j * np.pi * d_range[:, None] / 3e8 * freq[None, :])
 
+    print(f"M(length: {len(M)}) {M}")
+    
     # Compute sinc rise compensation
     RISE_THRESH = 0.25
     sinc = np.abs(M @ np.ones(128))
@@ -29,7 +33,7 @@ def export_idft_svd(start_dist, stop_dist, num_points, tol=1e-3):
 
     save_complex(L, 'idft_L.bin')
     save_complex(R, 'idft_R.bin')
-
+    
     print(f"idft_meta.bin {np.array([num_points, 128, r], dtype=np.uint32)}")
     print(f"idft_drange.bin {np.array(d_range, dtype=np.float32)}")
     print(f"idft_sinc_rise_comp.bin {np.array([sinc_rise_comp], dtype=np.float32)}")
