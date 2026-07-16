@@ -10,11 +10,11 @@ RUSTFLAGS = -O
 all: hello_c hello_rust
 
 # Rule to compile the executable
-hello_c: hello.c
-	$(CC) $(CFLAGS) -o hello hello.c
+hello_c: c/main.c
+	$(CC) $(CFLAGS) -o main_c c/main.c
 
-hello_rust: hello.rs
-	$(RUSTC) $(RUSTFLAGS) -o hello_rust hello.rs
+hello_rust: rust/main.rs
+	$(RUSTC) $(RUSTFLAGS) -o main_rust rust/main.rs
   
 # Rule to clean up build artifacts
 clean:
