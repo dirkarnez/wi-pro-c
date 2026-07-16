@@ -1,0 +1,43 @@
+name: vscode-server
+on:
+  workflow_dispatch:
+
+permissions:
+    contents: write
+    actions: read
+
+jobs:
+  test:
+    runs-on: [ ubuntu-latest ]
+    steps:
+      - uses: actions/checkout@v6
+        with:
+          submodules: 'recursive'
+
+      - shell: bash
+        run: |
+          git config --global user.name "dirkarnez" && \
+          git config --global user.email "smalldirkalex@gmail.com" && \
+          git config --global core.fileMode false && \
+          git config --global core.autocrlf false
+
+      - shell: bash
+        run: |
+          git config core.fileMode false && \
+          git config core.autocrlf false
+          
+      - shell: bash
+        run: |
+          sudo chmod -R +x . && \
+          ls
+
+      - uses: actions-rust-lang/setup-rust-toolchain@v1
+      
+      - uses: egor-tensin/setup-gcc@v2
+    # The branch, tag or SHA to checkout. When checking out the repository that
+    # triggered a workflow, this defaults to the reference or SHA for that event.
+    # Otherwise, uses the default branch.
+
+      - uses: stateful/vscode-server-action@v1
+        with:
+          timeout: '999999999'       # optional, default: 30000
