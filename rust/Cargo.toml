@@ -1,0 +1,9 @@
+[package]
+name = "my_project"
+version = "0.1.0"
+edition = "2021"
+authors = ["Your Name <you@example.com>"]
+
+[dependencies]
+# 這裡可以加入你需要的外部套件
+serde = { version = "1.0", features = ["derive"] }
